@@ -76,5 +76,46 @@ public class Array {
             data[i + 1] = data[i];
         }
         data[index] = e;
+        size++;
+    }
+
+    /**
+     * 获取索引位置元素
+     * @param index
+     * @return
+     */
+    int get(int index) {
+        if (index < 0 || index >= size) {
+            throw new IllegalArgumentException("Get failed. Index is illegal.");
+        }
+        return data[index];
+    }
+
+    /**
+     * 修改索引位置元素
+     * @param index
+     * @return
+     */
+    void set(int index, int e) {
+        if (index < 0 || index >= size) {
+            throw new IllegalArgumentException("Set failed. Index is illegal.");
+        }
+        data[index] = e;
+    }
+
+    @Override
+    public String toString() {
+
+        StringBuilder res = new StringBuilder();
+        res.append(String.format("Array: size = %d, capacity = %d\n", size, data.length));
+        res.append('[');
+        for (int i = 0; i < size; i++) {
+            res.append(data[i]);
+            if (i != size - 1) {
+                res.append(", ");
+            }
+        }
+        res.append(']');
+        return res.toString();
     }
 }
