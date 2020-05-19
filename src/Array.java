@@ -84,7 +84,7 @@ public class Array {
      * @param index
      * @return
      */
-    int get(int index) {
+    public int get(int index) {
         if (index < 0 || index >= size) {
             throw new IllegalArgumentException("Get failed. Index is illegal.");
         }
@@ -96,13 +96,90 @@ public class Array {
      * @param index
      * @return
      */
-    void set(int index, int e) {
+    public void set(int index, int e) {
         if (index < 0 || index >= size) {
             throw new IllegalArgumentException("Set failed. Index is illegal.");
         }
         data[index] = e;
     }
 
+    /**
+     * 查找数组中是否存在元素e
+     * @param e
+     * @return
+     */
+    public boolean contains(int e) {
+        for (int i = 0; i < size; i++) {
+            if (data[i] == e) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * 返回元素下标，找不到返回-1
+     * @param e
+     * @return
+     */
+    public int find(int e) {
+        for (int i = 0; i < size; i++) {
+            if (data[i] == e) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    /**
+     * 删除index位置元素
+     * @param index
+     * @return 删除的元素
+     */
+    public int remove(int index) {
+        if (index < 0 || index >= size) {
+            throw new IllegalArgumentException("Remove failed. Index is illegal.");
+        }
+
+        int ret = data[index];
+
+        for (int i = index; i <= size; i++) {
+            data[i] = data[i + 1];
+        }
+        size--;
+        return ret;
+    }
+
+    /**
+     * 删除首元素
+     * @return 删除的元素
+     */
+    public int removeFirst() {
+        return remove(0);
+    }
+
+    /**
+     * 删除末元素
+     * @return 删除的元素
+     */
+    public int removeLast() {
+        return remove(size - 1);
+    }
+
+    /**
+     * 删除特定元素
+     * @param e
+     * @return
+     */
+    public boolean removeElement(int e) {
+        for (int i = 0; i <= size; i++) {
+            if (data[i] == e) {
+                remove(i);
+                return true;
+            }
+        }
+        return false;
+    }
     @Override
     public String toString() {
 
