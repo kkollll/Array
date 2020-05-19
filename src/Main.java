@@ -10,7 +10,9 @@ public class Main {
 
         System.out.println(arr);
 
-        System.out.println(arr.removeElement("5"));
+        for (int i = 0; i < 3; i++) {
+            arr.removeLast();
+        }
 
         System.out.println(arr);
     }

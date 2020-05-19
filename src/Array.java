@@ -65,7 +65,7 @@ public class Array<E> {
     public void add(int index, E e) {
 
         if (size == data.length) {
-            throw new IllegalArgumentException("add failed. Array is full");
+            resize(2 * data.length);
         }
 
         if (index < 0 || index > size) {
@@ -77,6 +77,18 @@ public class Array<E> {
         }
         data[index] = e;
         size++;
+    }
+
+    /**
+     * 扩容数组
+     * @param newCapacity
+     */
+    private void resize(int newCapacity) {
+        E[] newData = (E[])new Object[newCapacity];
+        for (int i = 0; i < size; i++) {
+            newData[i] = data[i];
+        }
+        data = newData;
     }
 
     /**
@@ -143,11 +155,15 @@ public class Array<E> {
 
         E ret = data[index];
 
-        for (int i = index; i <= size; i++) {
-            data[i] = data[i + 1];
+        for (int i = index + 1; i < size; i++) {
+            data[i - 1] = data[i];
         }
         size--;
         data[size] = null; // loitering objects != memory leak
+
+        if (size <= data.length / 2) {
+            resize(data.length / 2);
+        }
         return ret;
     }
 
